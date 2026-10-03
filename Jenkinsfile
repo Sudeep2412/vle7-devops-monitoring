@@ -1,17 +1,10 @@
 pipeline {
     agent any
 
-    environment {
-        MINIKUBE_HOME = '/var/lib/jenkins/.minikube'
-    }
-
     stages {
         stage('Build Docker Image') {
             steps {
-                sh '''
-                    eval $(minikube docker-env)
-                    docker build -t myapp:latest .
-                '''
+                sh 'minikube image build -t myapp:latest .'
             }
         }
 
